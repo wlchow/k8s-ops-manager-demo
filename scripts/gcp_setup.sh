@@ -28,7 +28,7 @@ echo "Creating GCE disks"
 for i in 1 2 
 do
     # 4GB disks
-    gcloud compute disks create --size 4GB --type pd-ssd opsmgr-ssd-disk-4g-$i --zone northamerica-northeast1-a
+    gcloud compute disks create --size 4GB --type pd-ssd opsmgr-pd-ssd-disk-4g-$i --zone northamerica-northeast1-a
 done
 # disks for App DB, Oplog DB and Blockstore DB replica sets
 for i in 1 2 3 4 5 6 7 8 9
