@@ -1,0 +1,87 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-opsmgr-service
+  labels:
+    app: mongo-opsmgr
+spec:
+  ports:
+  - port: 8080
+    name: mongo-opsmgr
+  clusterIP: None
+  selector:
+    app: mongo-opsmgr
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-opsmgr-external
+  labels:
+    name: mongo-opsmgr
+spec:
+  ports:
+  - port: 8080
+    nodePort: 32008
+  selector:
+    app: mongo-opsmgr
+  type: NodePort
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: mongo-opsmgr
+spec:
+  selector:
+    matchLabels:
+      app: mongo-opsmgr
+  serviceName: "mongo-opsmgr-service"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mongo-opsmgr
+    spec:
+      containers:
+        - name: mongo-opsmgr-container
+          image: wchow/mongodb-opsmgr:4.2.2
+          env:
+          - name: MONGO_OPSMGR_VERSION
+            value: "4.2.2.56673.20191001T1500Z-1"
+          command: [ "/bin/bash", "-c", "--" ]
+          args: [ "/mongodb-mms-4.2.2.56673.20191001T1500Z-1.x86_64/bin/mongodb-mms start && while true; do sleep 30; done;" ] 
+          resources:
+            requests:
+              cpu: 0.25
+              memory: 512Mi
+          ports:
+            - containerPort: 8080
+              name: mongo-opsmgr
+          volumeMounts:
+            - name: mongo-opsmgr-persistent-storage-claim
+              mountPath: /root
+            - name: mongo-opsmgr-headdb-persistent-storage-claim
+              mountPath: /data/headdb
+            - name: "conf-mms"
+              mountPath: "/mongodb-mms-4.2.2.56673.20191001T1500Z-1.x86_64/conf/conf-mms.properties"
+              subPath: "conf-mms.properties"
+      volumes:
+        - name: "conf-mms"
+          configMap:
+            name: "conf-mms"
+  volumeClaimTemplates:
+  - metadata:
+      name: mongo-opsmgr-persistent-storage-claim
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "fast"
+      resources:
+        requests:
+          storage: 4Gi
+  - metadata:
+      name: mongo-opsmgr-headdb-persistent-storage-claim
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "fast"
+      resources:
+        requests:
+          storage: 4Gi
