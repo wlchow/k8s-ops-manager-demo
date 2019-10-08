@@ -2,8 +2,10 @@
 
 An example project demonstrating the deployment of MongoDB Ops Manager via Kubernetes on the Google Kubernetes Engine (GKE), using the following Kubernetes' features: StatefulSet, Secrets, ConfigMap, Persistent Volumes and Persistent Volume Claims. Contains example Kubernetes YAML resource files (in the 'resource' folder) and associated Kubernetes based Bash scripts (in the 'scripts' folder) to configure the environment and deploy MongoDB Ops Manager, MongoDB Application DB, Oplog DB and Blockstore DB.
 
-#### Reference
+#### References
 This builds upon the work done by Paul Done which can be found here: [http://k8smongodb.net/](http://k8smongodb.net/)
+
+This uses the Ops Manager Docker image that was created using [mongodb-ops-manager-docker-image](https://github.com/wlchow/mongodb-ops-manager-docker-image)
 
 ## How To Run
 
