@@ -14,7 +14,7 @@ This uses the Ops Manager Docker image that was created using [mongodb-ops-manag
 Ensure the following dependencies are already fulfilled on your host Linux/Windows/Mac Workstation/Laptop:
 
 1. An account has been registered with the Google Compute Platform (GCP).
-2. GCP’s client command line tool [gcloud](https://cloud.google.com/sdk/docs/quickstarts) has been installed on your local workstation. 
+2. Follow the [Google Cloud SDK Quickstart](https://cloud.google.com/sdk/docs/quickstarts) for your Operating System and make sure GCP’s client command line tool `gcloud` has been installed on your local workstation. 
 3. Your local workstation has been initialised to: (1) use your GCP account, (2) install the Kubernetes command tool (“kubectl”), (3) configure authentication credentials, and (4) set the default GCP zone to be deployed to:
 
     ```
