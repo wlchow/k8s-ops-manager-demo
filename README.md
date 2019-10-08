@@ -1,13 +1,13 @@
 # MongoDB Ops Manager Demo for Kubernetes on GKE
 
-An example project demonstrating the deployment of MongoDB Ops Manager via Kubernetes on the Google Kubernetes Engine (GKE), using the following Kubernetes' features: StatefulSet, Secrets, ConfigMap, Persistent Volumnes and Persistent Volumne Claims. Contains example Kubernetes YAML resource files (in the 'resource' folder) and associated Kubernetes based Bash scripts (in the 'scripts' folder) to configure the environment and deploy MongoDB Ops Manager.
+An example project demonstrating the deployment of MongoDB Ops Manager via Kubernetes on the Google Kubernetes Engine (GKE), using the following Kubernetes' features: StatefulSet, Secrets, ConfigMap, Persistent Volumes and Persistent Volume Claims. Contains example Kubernetes YAML resource files (in the 'resource' folder) and associated Kubernetes based Bash scripts (in the 'scripts' folder) to configure the environment and deploy MongoDB Ops Manager, MongoDB Application DB, Oplog DB and Blockstore DB.
 
 #### Reference
 This builds upon the work done by Paul Done which can be found here: [http://k8smongodb.net/](http://k8smongodb.net/)
 
-## 1. How To Run
+## How To Run
 
-### 1.1 Prerequisites
+### 1 Prerequisites
 
 Ensure the following dependencies are already fulfilled on your host Linux/Windows/Mac Workstation/Laptop:
 
@@ -24,7 +24,7 @@ Ensure the following dependencies are already fulfilled on your host Linux/Windo
 
 **Note:** To specify an alternative zone to deploy to, in the above command, you can first view the list of available zones by running the command: `$ gcloud compute zones list`
 
-### 1.2 Deployment
+### 2 Deployment
 
 Using a command-line terminal/shell, execute the following (first change the password variable NEW_PASSWORD in the script "deploy_ops_manager.sh", if appropriate):
 
@@ -44,7 +44,7 @@ You can view the list of Pods that contain these MongoDB resources, by running t
     $ kubectl get pods
 
 
-### 1.3 Google Cloud Configuration
+### 3 Google Cloud Configuration
 
 In the [Google Cloud Platform Console](https://console.cloud.google.com), in the search box at the top, enter “Firewall” and select the matching suggestion "Firewall Rules VPC network”
 
@@ -67,7 +67,7 @@ In the search box at the top, enter “Compute Engine” and select the matching
 There should be three VM instances which are part of the GKE gke-ops-manager-demo-cluster cluster. Make a note of any one of the External IP addresses.
 ![](images/image04.png)
 
-### 1.4 Ops Manager UI
+### 4 Ops Manager UI
 
 Open a web browser and navigate to the Ops Manager home page to register the first user and to configure Ops Manager. Note that we have explicitly exposed NodePort 32008
 ```
@@ -78,7 +78,7 @@ http://<One of the External IP addresses>:32008
 After you have configured it, look at the System Overview page
 ![](images/image06.png)
 
-### 1.5 Undeploying & Cleaning Down the Kubernetes Environment
+### 5 Undeploying & Tearing Down the Kubernetes Environment
 
 **Important:** This step is required to ensure you aren't continuously charged by Google Cloud for an environment you no longer need.
 
