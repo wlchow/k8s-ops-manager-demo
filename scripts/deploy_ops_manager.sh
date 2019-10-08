@@ -52,8 +52,10 @@ echo
 # Initiate MongoDB Replica Set configuration
 echo "Configuring the AppDB MongoDB Replica Set"
 kubectl exec mongod-appdb-0 -c mongod-appdb-container -- mongo --eval 'rs.initiate({_id: "AppDBRepSet", version: 1, members: [ {_id: 0, host: "mongod-appdb-0.mongodb-appdb-service.default.svc.cluster.local:27017"}, {_id: 1, host: "mongod-appdb-1.mongodb-appdb-service.default.svc.cluster.local:27017"}, {_id: 2, host: "mongod-appdb-2.mongodb-appdb-service.default.svc.cluster.local:27017"} ]});'
+# NOTE: for testing, the OplogDB is a 1 member replication set
 echo "Configuring the OplogDB MongoDB Replica Set"
 kubectl exec mongod-oplogdb-0 -c mongod-oplogdb-container -- mongo --eval 'rs.initiate({_id: "OplogDBRepSet", version: 1, members: [ {_id: 0, host: "mongod-oplogdb-0.mongodb-oplogdb-service.default.svc.cluster.local:27017"} ]});'
+# NOTE: for testing, the BlockstoreDB is a 1 member replica set
 echo "Configuring the BlockstoreDB MongoDB Replica Set"
 kubectl exec mongod-blockstoredb-0 -c mongod-blockstoredb-container -- mongo --eval 'rs.initiate({_id: "BlockstoreDBRepSet", version: 1, members: [ {_id: 0, host: "mongod-blockstoredb-0.mongodb-blockstoredb-service.default.svc.cluster.local:27017"} ]});'
 echo
