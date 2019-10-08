@@ -35,7 +35,7 @@ spec:
     matchLabels:
       app: mongo-opsmgr
   serviceName: "mongo-opsmgr-service"
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -44,9 +44,6 @@ spec:
       containers:
         - name: mongo-opsmgr-container
           image: wchow/mongodb-opsmgr:4.2.2
-          env:
-          - name: MONGO_OPSMGR_VERSION
-            value: "4.2.2.56673.20191001T1500Z-1"
           command: [ "/bin/bash", "-c", "--" ]
           args: [ "/mongodb-mms-4.2.2.56673.20191001T1500Z-1.x86_64/bin/mongodb-mms start && while true; do sleep 30; done;" ] 
           resources:
@@ -57,14 +54,20 @@ spec:
             - containerPort: 8080
               name: mongo-opsmgr
           volumeMounts:
+            - name: "shared-opsmgr-data"
+              mountPath: /root/.mongodb-mms
             - name: mongo-opsmgr-persistent-storage-claim
-              mountPath: /root
+              mountPath: /opt/mongodb/mms/mongodb-releases/
             - name: mongo-opsmgr-headdb-persistent-storage-claim
               mountPath: /data/headdb
             - name: "conf-mms"
               mountPath: "/mongodb-mms-4.2.2.56673.20191001T1500Z-1.x86_64/conf/conf-mms.properties"
               subPath: "conf-mms.properties"
       volumes:
+        - name: "shared-opsmgr-data"
+          secret:
+            secretName: "shared-opsmgr-data"
+            defaultMode: 256
         - name: "conf-mms"
           configMap:
             name: "conf-mms"

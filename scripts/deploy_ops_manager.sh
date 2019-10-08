@@ -11,6 +11,12 @@ TMPFILE=$(mktemp)
 kubectl create secret generic shared-bootstrap-data --from-file=internal-auth-mongodb-keyfile=$TMPFILE
 rm $TMPFILE
 
+# For Ops Manager, create the gen.key file manually as a Kubernetes shared secret
+TMPFILE=$(mktemp)
+/usr/bin/openssl rand 24 > $TMPFILE
+kubectl create secret generic shared-opsmgr-data --from-file=gen.key=$TMPFILE
+rm $TMPFILE
+
 # Create ConfigMap to hold the Ops Manager configuration properties file (i.e. conf-mms.properties)
 kubectl create configmap conf-mms --from-file ../resources/conf-mms.properties
 

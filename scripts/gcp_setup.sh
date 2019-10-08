@@ -21,11 +21,11 @@ kubectl apply -f ../resources/hostvm-node-configurer-daemonset.yaml
 
 # Register GCE Fast SSD persistent disks and then create the persistent disks 
 echo "Creating GCE disks"
-# disks for Ops Manager (i.e. ${HOME} and Head Database directory)
+# disks for Ops Manager (i.e. Versions/Binaries and Head Database directories)
 #
 # https://docs.opsmanager.mongodb.com/current/core/requirements/#backup-daemon-hardware-requirements
 #   Typically, each host on which you activate the Backup Daemon needs to store 2.0 to 2.5 times the sum of the size on disk of all the backed-up replica sets.
-for i in 1 2 
+for i in 1 2 3 4
 do
     # 4GB disks
     gcloud compute disks create --size 4GB --type pd-ssd opsmgr-pd-ssd-disk-4g-$i --zone northamerica-northeast1-a
@@ -41,7 +41,7 @@ sleep 3
 
 # Create persistent volumes using disks that were created above
 echo "Creating GKE Persistent Volumes"
-for i in 1 2
+for i in 1 2 3 4
 do
     # Replace text stating volume number + size of disk (set to 4)
     sed -e "s/INST/${i}/g; s/SIZE/4/g" ../resources/xfs-gce-ssd-persistentvolume.yaml > /tmp/xfs-gce-ssd-persistentvolume.yaml
