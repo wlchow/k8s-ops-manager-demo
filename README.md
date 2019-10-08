@@ -5,7 +5,8 @@ An example project demonstrating the deployment of MongoDB Ops Manager via Kuber
 #### References
 This builds upon the work done by Paul Done which can be found here: [http://k8smongodb.net/](http://k8smongodb.net/)
 
-This uses the Ops Manager Docker image that was created using [mongodb-ops-manager-docker-image](https://github.com/wlchow/mongodb-ops-manager-docker-image)
+By default, this will use Ops Manager 4.2.2 (4.2.2.56673.20191001T1500Z-1)
+This uses the Ops Manager 4.2.2 Docker image that was created using [mongodb-ops-manager-docker-image](https://github.com/wlchow/mongodb-ops-manager-docker-image)
 
 ## How To Run
 
