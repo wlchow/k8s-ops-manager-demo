@@ -7,7 +7,7 @@ By default, this will use [Ops Manager 4.2.2](https://docs.opsmanager.mongodb.co
 
 This uses the Ops Manager 4.2.2 Docker image that was created using [mongodb-ops-manager-docker-image](https://github.com/wlchow/mongodb-ops-manager-docker-image)
 
-This builds upon the work done by Paul Done which can be found here: [http://k8smongodb.net/](http://k8smongodb.net/)
+This builds upon the work done by Paul Done which can be found here: [http://k8smongodb.net](http://k8smongodb.net)
 
 ## How To Run
 
@@ -93,4 +93,4 @@ Run the following script to undeploy the MongoDB Services & StatefulSets plus re
 It is also worth checking in the [Google Cloud Platform Console](https://console.cloud.google.com), to ensure all resources have been removed correctly.
 
 ## Acknowledgements
-This builds upon the work done by Paul Done which can be found here: [http://k8smongodb.net/](http://k8smongodb.net/)
+This builds upon the work done by Paul Done which can be found here: [http://k8smongodb.net](http://k8smongodb.net)
